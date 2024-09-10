@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tapalka</title>
+</head>
+
+
+<style>body {
+     font-family: sans-serif;
+     text-align: center;
+     margin: 0;
+     padding: 0;
+     background-color: black;
+  }
+ 
+  h1 {
+ 
+    color: white;
+    font-size: 50px;
+  }
+  
+  .containerhome {
+     max-width:400 px;
+     margin: 0 auto;
+     padding: 20px;
+ 
+ }
+  
+ 
+  .header {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 20px;
+  }
+ 
+ 
+  .header h1 {
+     flex-grow: 1;
+     font-size: 1.5rem; /* Используем относительные единицы измерения для шрифта */
+  }
+ 
+  .header img {
+     width: 1.5rem; 
+     height: 1.5rem;
+  }
+ 
+  .image-placeholder {
+     width: 80%; /* Ширина относительно родительского контейнера */
+    
+     margin: 0 auto 20px auto;
+     position: relative;
+     justify-content: flex-start;
+  
+     
+  }
+  
+  .balance {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 20px;
+     color: white;
+  }
+  
+  .balance span {
+     font-size: 2rem;
+     margin-right: 0.5rem;
+  }
+  
+  .balance img {
+     width: 1.5rem;
+     height: 1.5rem;
+  }
+  
+  .navbar a {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-decoration: none;
+     color: black;
+  }
+  
+  .navbar img {
+     width: 1.5rem;
+     height: 1.5rem;
+     margin-bottom: 5px;
+  }
+  
+   .task-list {
+     list-style: none;
+     padding: 0;
+   }
+  
+  
+  .navbar {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     background-color: #f0f0f0; /* Цвет фона навигации */
+     display: flex;
+     justify-content: space-around; 
+     padding: 10px 0;
+     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень сверху */
+   }
+   #click-area {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     cursor: pointer; /* Курсор - указатель */
+  }
+   
+  .task {
+             width: 80%; /* Ширина относительно родительского контейнера */
+             
+             border: 1px solid #ccc;
+             margin: 0 auto 20px auto;
+             position: relative;
+             justify-content: flex-start;
+     
+         }
+ 
+ 
+  .task-list {
+     list-style: none;
+     padding: 0;
+   }
+  
+   .task-item {
+     
+     margin-bottom: 15px;
+     
+     border-radius: 5px;
+     background-color: #333;
+     transition: background-color 0.3s ease;
+     position: relative; /* Для позиционирования галочки */
+     cursor: pointer; /* Курсор - указатель */
+   }
+   .task-item a {
+     display: block; /* Ссылка занимает всю ширину и высоту элемента */
+     padding: 10px;   /* Добавляем отступы для удобства клика */
+   }
+   .task-item:hover {
+     background-color: #333;
+   }
+  
+ 
+ 
+   .task-item.completed::before {
+        background-color: #333;
+     content: 'выполнено'; 
+     position: absolute;
+     color: hwb(106 0% 0%);
+     top: 50%;
+     left: 10px;
+     transform: translateY(-50%);
+     font-size: 1.2em;
+   }
+  
+   .task-link {
+     
+     text-decoration: none;
+   }
+  
+   .task-link:hover {
+     text-decoration: underline;
+   }
+ 
+   a {
+     color: inherit; /* Наследуем цвет от родительского элемента */ 
+     text-decoration: none;
+   }
+   
+ #customAlert {
+   
+     position: fixed; 
+     z-index: 1000; /* Чтобы окно было поверх других элементов */
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+ }
+ p {
+    color: #ffffff;
+    font-size: 2em;
+ }
+ 
+ .alert-content {
+     background-color: #fff;
+     margin: 15% auto; 
+     padding: 20px;
+     border-radius: 5px;
+     width: 300px; 
+     text-align: center;
+ }
+ 
+ #alertMessage {
+     
+     font-size: 18px;
+     margin-bottom: 15px;
+ }
+ 
+ #alertClose {
+     padding: 10px 20px;
+     font-size: 16px;
+     background-color: #4CAF50; 
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer; 
+ }
+ </style>
+<body>
+  <div class="containerhome">
+    
+    <div class="header">
+      <h1>Задания</h1>
+      <img src="icn\settings.png" alt="Settings Icon">
+    </div>
+
+    <p>Выполняй простые задания и получай монеты</p>
+
+    <div class="task">
+        <ul class="task-list">
+            <li class="task-item" data-task-id="1">
+                <a href="https://t.me/o777oo_ABH" target="_blank" id="task-link-1">
+                      Подписаться на Telegram 
+                </a>
+            </li>
+            <li class="task-item" data-task-id="2">
+                 <a href="https://t.me/..." target="_blank" id="task-link-2">
+                      Подписаться на Сообщество  
+                 </a>
+            </li>
+            <li class="task-item" data-task-id="3">
+                 <a href="https://t.me/..." target="_blank" id="task-link-3">
+                      Подписаться на YouTube
+                 </a>
+            </li>
+            <li class="task-item" data-task-id="4">
+                 <a href="https://t.me/o777oo_ABH" target="_blank" id="task-link-4">
+                      Подписаться на Telegram 
+                 </a>
+            </li>
+            <li class="task-item" data-task-id="9">
+                 <a href="https://t.me/..." target="_blank" id="task-link-5">
+                      Подписаться на Сообщество  
+                 </a>
+            </li>
+            <li class="task-item" data-task-id="6">
+                 <a href="https://t.me/..." target="_blank" id="task-link-6">
+                      Подписаться на YouTube
+                 </a>
+            </li>
+         </ul>
+     </div>
+
+    <div class="navbar">
+          <a href="index.html">
+            <img src="icn\home.png" alt="Home Icon">
+                <span>Home</span>
+          </a>
+          <a href="tasks.html">
+            <img src="icn\quest.png" alt="Tasks Icon">
+                <span>Tasks</span>
+          </a>
+          <a href="friends.html"> 
+             <img src="icn\friends.png" alt="Friends Icon">
+                <span>Friends</span>
+        </a> </div> 
+  
+  <div id="customAlert">
+    <div class="alert-content">
+        <p id="alertMessage"></p>
+        <button id="alertClose">Продолжить</button>
+    </div> 
+  </div>
+<script>
+     const taskList = document.querySelectorAll('.task-list a');
+
+function isTaskCompleted(taskId) {
+  const completedTasks = JSON.parse(localStorage.getItem('completedTasks') || '{}');
+  return completedTasks[taskId];
+}
+
+function markTaskCompleted(taskId) {
+  const completedTasks = JSON.parse(localStorage.getItem('completedTasks') || '{}');
+  completedTasks[taskId] = true;
+  localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+}
+
+function updateTaskItem(taskItem) {
+  const taskId = taskItem.dataset.taskId;
+
+  if (isTaskCompleted(taskId)) {
+    taskItem.classList.add('completed');
+    const link = taskItem.querySelector('a');
+    link.removeAttribute('href'); 
+  } else {
+    taskItem.classList.remove('completed');
+    const link = taskItem.querySelector('a');
+    link.href = link.dataset.originalHref; 
+  }
+}
+
+function showCustomAlert() {
+  if (message) { 
+    document.getElementById('alertMessage').innerText = message;
+    document.getElementById('customAlert').style.display = 'block';
+  }
+}
+
+window.addEventListener('load', () => {
+  const taskItems = document.querySelectorAll('.task-item');
+  taskItems.forEach(updateTaskItem);
+
+  const completedTaskId = localStorage.getItem('pendingTaskId');
+
+  // Проверяем, не было ли это задание уже выполнено
+  if (completedTaskId && !isTaskCompleted(completedTaskId) && !localStorage.getItem('taskCompleted-' + completedTaskId)) { 
+    markTaskCompleted(completedTaskId);
+
+    let currentBalance = parseInt(localStorage.getItem('coinBalance') || '0', 10);
+    const earnedCoins = 10000;
+    localStorage.setItem('coinBalance', currentBalance + earnedCoins);
+
+    // Отправляем сообщение на index.html
+    window.parent.postMessage({ type: 'taskCompleted', taskId: completedTaskId }, '*');
+
+    const completedTaskItem = document.querySelector(`.task-item[data-task-id="${completedTaskId}"]`);
+    if (completedTaskItem) {
+      updateTaskItem(completedTaskItem);
+    }
+
+    const message = 'Поздравляем! Вам начислено 10000 монет!';
+    showCustomAlert(message); 
+
+    // Помечаем задание как обработанное 
+    localStorage.setItem('taskCompleted-' + completedTaskId, 'true');
+  } 
+
+  localStorage.removeItem('pendingTaskId'); 
+  localStorage.removeItem('taskCompleted-' + completedTaskId); // Удаляем метку
+});
+
+taskList.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const taskItem = link.closest('.task-item');
+    const taskId = taskItem.dataset.taskId;
+
+    if (!isTaskCompleted(taskId)) {
+      localStorage.setItem('pendingTaskId', taskId);
+
+      // Удаляем метку перед переходом по ссылке
+      localStorage.removeItem('taskCompleted-' + taskId);
+
+      window.location.href = link.href; 
+    } else {
+      showCustomAlert('Это задание уже выполнено!'); 
+    }
+  });
+});
+
+document.getElementById('alertClose').addEventListener('click', () => {
+  document.getElementById('customAlert').style.display = 'none';
+});
+
+document.getElementById('customAlert').addEventListener('click', (event) => {
+  if (event.target === document.getElementById('customAlert')) { 
+    document.getElementById('customAlert').style.display = 'none';
+  }
+});
+
+</script>
+
+</body>
+</html>
