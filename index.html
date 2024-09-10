@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tapalka</title>
+  <style>
+
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+ }
+
+ h1 {
+
+   color: white;
+   font-size: 50px;
+ }
+ 
+ .containerhome {
+    max-width:400 px;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+ 
+
+ .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+ }
+
+
+ .header h1 {
+    flex-grow: 1;
+    font-size: 1.5rem; /* Используем относительные единицы измерения для шрифта */
+ }
+
+ .header img {
+    width: 1.5rem; 
+    height: 1.5rem;
+ }
+
+ .image-placeholder {
+    width: 80%; /* Ширина относительно родительского контейнера */
+   
+    margin: 0 auto 20px auto;
+    position: relative;
+    justify-content: flex-start;
+ 
+    
+ }
+ .balance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+ }
+ 
+ .balance span {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+ }
+ 
+ .balance img {
+    width: 1.5rem;
+    height: 1.5rem;
+ }
+ 
+ .navbar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+ }
+ 
+ .navbar img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 5px;
+ }
+ 
+  .task-list {
+    list-style: none;
+    padding: 0;
+  }
+ 
+ 
+ .navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-around; 
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  #click-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+ }
+  </style>
+</head>
+<body>
+  <div class="containerhome">
+        <h1>Тапай и зарабатывай</h1>
+
+            <div class="image-placeholder">
+                <img id="clickable-image" src="icn\pngwing.png" alt="Clickable Image">
+                <div id="click-area"></div> 
+                
+                <div id="coin-animation"></div>    
+          </div>    
+        </div>
+        <div class="balance">
+          <span id="coin-balance">0</span> монет
+       </div>
+       
+        <div class="navbar">
+            <a href="index.html">
+                <img src="icn\home.png" alt="Home Icon">
+                <span>Home</span>
+            </a>
+            <a href="tasks.html">
+                <img src="icn\quest.png" alt="Tasks Icon">
+                <span>Tasks</span>
+            </a>
+            <a href="friends.html">
+                <img src="icn\friends.png" alt="Friends Icon">
+                <span>Friends</span>
+    
+        </div>
+    </div>
+    <script>
+  const clickArea = document.getElementById('click-area');
+  const balanceDisplay = document.getElementById('coin-balance'); 
+  const clickableImage = document.getElementById('clickable-image');
+
+  let balance = 0;
+
+  function getBalance() {
+  return parseInt(localStorage.getItem('coinBalance') || '0', 10);
+  }
+
+  function saveBalance(newBalance) {
+  localStorage.setItem('coinBalance', newBalance);
+  }
+
+  function updateBalanceDisplay() {
+  balanceDisplay.textContent = getBalance();
+  }
+
+  balance = getBalance();
+  updateBalanceDisplay();
+
+  function getRandomCoins() {
+  return Math.floor(Math.random() * 5) + 1;
+  }
+
+  clickArea.addEventListener('click', () => {
+  const earnedCoins = getRandomCoins();
+  balance += earnedCoins;
+  saveBalance(balance);
+  updateBalanceDisplay();
+  clickableImage.click();
+ 
+  });
+
+  window.addEventListener('message', (event) => {
+  if (event.data.type === 'taskCompleted') {
+
+    balance += event.data.coins; 
+    saveBalance(balance); 
+    updateBalanceDisplay();
+  }
+});
+  </script>
+</body>
+</html>
