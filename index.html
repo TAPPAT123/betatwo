@@ -13,21 +13,19 @@ body {
     margin: 0;
     padding: 0;
     background-color: black;
+    color: white; /* Цвет текста по умолчанию - белый */
  }
 
  h1 {
-
-   color: white;
-   font-size: 50px;
+   font-size: 3rem; /* Относительный размер шрифта */
+   margin-bottom: 20px; 
  }
- 
+
  .containerhome {
-    max-width:400 px;
+    max-width: 90%; /* Занимаем до 90% ширины родителя */
     margin: 0 auto;
     padding: 20px;
-
 }
- 
 
  .header {
     display: flex;
@@ -36,64 +34,40 @@ body {
     margin-bottom: 20px;
  }
 
-
  .header h1 {
     flex-grow: 1;
-    font-size: 1.5rem; /* Используем относительные единицы измерения для шрифта */
+    font-size: 1.5rem;
  }
 
  .header img {
-    width: 1.5rem; 
+    width: 1.5rem;
     height: 1.5rem;
  }
 
  .image-placeholder {
-    width: 80%; /* Ширина относительно родительского контейнера */
-   
+    width: 80%;
+    max-width: 300px; /* Ограничиваем максимальную ширину */
     margin: 0 auto 20px auto;
     position: relative;
-    justify-content: flex-start;
- 
-    
  }
+
  .balance {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    color: white;
  }
- 
+
  .balance span {
     font-size: 2rem;
     margin-right: 0.5rem;
  }
- 
+
  .balance img {
     width: 1.5rem;
     height: 1.5rem;
  }
- 
- .navbar a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: black;
- }
- 
- .navbar img {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-bottom: 5px;
- }
- 
-  .task-list {
-    list-style: none;
-    padding: 0;
-  }
- 
- 
+
  .navbar {
     position: fixed;
     bottom: 0;
@@ -101,11 +75,32 @@ body {
     width: 100%;
     background-color: #f0f0f0;
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
     padding: 10px 0;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   }
-  #click-area {
+
+ .navbar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem; /* Уменьшаем размер шрифта в navbar */
+ }
+
+ .navbar img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 5px;
+ }
+
+ .task-list {
+    list-style: none;
+    padding: 0;
+  }
+
+ #click-area {
     position: absolute;
     top: 0;
     left: 0;
@@ -113,6 +108,36 @@ body {
     height: 100%;
     cursor: pointer;
  }
+
+ /* Медиа-запросы для адаптации */
+ @media (max-width: 768px) { 
+    h1 {
+        font-size: 2.5rem; 
+    }
+
+    .balance span {
+        font-size: 1.8rem;
+    }
+
+    .containerhome {
+        padding: 15px; 
+    }
+ }
+
+ @media (max-width: 480px) { 
+    h1 {
+        font-size: 2rem; 
+    }
+
+    .balance span {
+        font-size: 1.5rem;
+    }
+
+    .navbar a {
+        font-size: 0.7rem; 
+    }
+ }
+
   </style>
 </head>
 <body>
