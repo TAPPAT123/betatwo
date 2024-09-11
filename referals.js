@@ -36,7 +36,7 @@ function getUserId() {
 
 // Генерация реферальной ссылки
 function generateReferralLink(userId) {
-  return `https://tappat123.github.io/betatwo/referals.html?ref=${btoa(userId)}`; 
+  return `https://tappat123.github.io/betatwo/{btoa(userId)}`; 
 }
 
 // Обновление баланса монет пользователя 
